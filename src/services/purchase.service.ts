@@ -60,8 +60,7 @@ export const updatePurchase = async (purchaseId: string, purchase: Partial<Purch
   try {
     const docRef = doc(db, COLLECTION_NAME, purchaseId);
     const updateData = { ...purchase, updatedAt: Timestamp.now() };
-    if (purchase.date) updateData.date = Timestamp.fromDate(new Date(purchase.date));
-    await updateDoc(docRef, updateData);
+    if (purchase.date && !(purchase.date instanceof Timestamp)) updateData.date = Timestamp.fromDate(new Date(purchase.date));    await updateDoc(docRef, updateData);
   } catch (error) {
     console.error('Error updating purchase:', error);
     throw error;
