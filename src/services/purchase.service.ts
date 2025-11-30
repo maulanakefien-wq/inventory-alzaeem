@@ -1,4 +1,3 @@
-import { db } from '@/config/firebase';
 import { Purchase } from '@/types';
 
 const COLLECTION_NAME = 'purchases';
