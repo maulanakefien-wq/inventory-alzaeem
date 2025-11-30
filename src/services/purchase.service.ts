@@ -59,8 +59,7 @@ export const getPurchasesByDateRange = async (startDate: Date, endDate: Date): P
 export const updatePurchase = async (purchaseId: string, purchase: Partial<Purchase>) => {
   try {
     const docRef = doc(db, COLLECTION_NAME, purchaseId);
-    const updateData = { ...purchase, updatedAt: Timestamp.now() };
-    if (purchase.date && !(purchase.date instanceof Timestamp)) updateData.date = Timestamp.fromDate(new Date(purchase.date));    await updateDoc(docRef, updateData);
+    const updateData = { productId: purchase.productId, quantity: purchase.quantity, buyPrice: purchase.buyPrice, supplier: purchase.supplier, invoiceNumber: purchase.invoiceNumber, notes: purchase.notes, updatedAt: Timestamp.now() };    if (purchase.date && !(purchase.date instanceof Timestamp)) updateData.date = Timestamp.fromDate(new Date(purchase.date));    await updateDoc(docRef, updateData);
   } catch (error) {
     console.error('Error updating purchase:', error);
     throw error;
